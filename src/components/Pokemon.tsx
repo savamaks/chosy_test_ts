@@ -12,8 +12,11 @@ const Image = styled.div<{ bg_image: string }>`
     border-radius: 50%;
     cursor: pointer;
 `;
-
-const Pokemon = ({ url, selectPokemon }: any): JSX.Element => {
+interface PokemonType {
+    url:string,
+    selectPokemon:any
+}
+const Pokemon = ({ url, selectPokemon }: PokemonType): JSX.Element => {
     const [data, setData] = useState([]);
     const ref = useRef(null);
 

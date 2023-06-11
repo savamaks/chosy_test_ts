@@ -10,7 +10,11 @@ const Container = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
+    padding: 0 16px 16px 16px;
 `;
+
+
+
 const PokemonBox = ({ data, selectPokemon }: any): JSX.Element => {
    if(data.length !== 0){
     return (

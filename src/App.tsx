@@ -48,10 +48,10 @@ const Main = styled.main`
     gap: 16px;
 `;
 
+
 function App(): JSX.Element {
     const [data, setData] = useState([]);
     const [urlMainPokemon, setUrlMainPokemon] = useState("");
-
     const url = `https://pokeapi.co/api/v2/pokemon/?limit=12`;
 
     const changeData = (value: any): void => {

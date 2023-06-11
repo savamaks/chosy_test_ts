@@ -3,10 +3,8 @@ async function requestAPI(changeData: any, url: string): Promise<void> {
         const response = await fetch(url);
         const data = await response.json();
         changeData(data);
-        //данные уходят в компонент app
     } catch {
-        //данные уходят в компонент app
-        changeData("error");
+       console.log('error');;
     }
 }
 
