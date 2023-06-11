@@ -2,13 +2,13 @@ import { useState, useEffect, useRef } from "react";
 import requestAPI from "./requestAPI";
 import styled from "styled-components";
 
-const Image = styled.div<{ image: string }>`
+const Image = styled.div<{ bg_image: string }>`
     width: 75px;
     height: 75px;
+    background-image: url(${(props): string => props.bg_image});
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url(${(props): string => props.image});
     border-radius: 50%;
     cursor: pointer;
 `;
@@ -20,20 +20,19 @@ const Pokemon = ({ url, selectPokemon }: any): JSX.Element => {
     const changeData = (value: any):void => {
         setData(value);
     };
-    const clickPokemon = ():void => {
-        
-        ref.current.parentElement.childNodes.forEach((el:any):void=>{
+    const clickPokemon = (e:any):void => {
+        e.target.parentElement.parentElement.childNodes.forEach((el:any):void=>{
             el.style.border = 'none'
         })
-        ref.current.style.border = '2px solid #8000FF'
-
+        e.target.parentElement.style.border = '2px solid #8000FF'
+        
         selectPokemon(data.sprites.other.dream_world.front_default);
     };
     useEffect(():void => {
         requestAPI(changeData, url);
     }, []);
 
-    return <Image ref={ref} onClick={clickPokemon} image={data.length !== 0 && data.sprites.other.dream_world.front_default}></Image>;
+    return <Image key={1} ref={ref} onClick={clickPokemon} bg_image={data.length !== 0 ? data.sprites.other.dream_world.front_default:'none'}></Image>;
 };
 
 export default Pokemon;

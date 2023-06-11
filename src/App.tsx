@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import requestAPI from "./components/requestAPI";
 import { useEffect, useState } from "react";
-import Pokemon from "./components/Pokemon";
+import PokemonBox from "./components/PokemonBox";
 import Header from "./components/Header";
 
 const AppDiv = styled.div`
-    background: #F5F5F5;
+    background: #f5f5f5;
     width: 100vw;
     height: 100vh;
     padding: 10px;
@@ -21,15 +21,8 @@ const Block = styled.div`
     padding-bottom: 17px;
     background: #ffffff;
     border-radius: 24px;
-`
-
-const Container = styled.div`
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
 `;
+
 const Title = styled.h2`
     font-family: "Roboto Flex";
     font-style: normal;
@@ -56,18 +49,18 @@ const Main = styled.main`
 `;
 
 function App(): JSX.Element {
-    const [data, setData] = useState({});
+    const [data, setData] = useState([]);
     const [urlMainPokemon, setUrlMainPokemon] = useState("");
 
     const url = `https://pokeapi.co/api/v2/pokemon/?limit=12`;
 
-    const changeData = (value: any):void => {
+    const changeData = (value: any): void => {
         setData(value);
     };
-    const selectPokemon = (url: string):void => {
+    const selectPokemon = (url: string): void => {
         setUrlMainPokemon(url);
     };
-    useEffect(():void => {
+    useEffect((): void => {
         requestAPI(changeData, url);
     }, []);
 
@@ -78,12 +71,7 @@ function App(): JSX.Element {
                 <Main>
                     <MainFoto backgroundImage={urlMainPokemon}></MainFoto>
                     <Title>Выберите фото покемона</Title>
-                    <Container>
-                        {data.results &&
-                            data.results.map((el: any): JSX.Element => {
-                                return <Pokemon url={el.url} selectPokemon={selectPokemon} />;
-                            })}
-                    </Container>
+                    <PokemonBox data={data} selectPokemon={selectPokemon} />
                 </Main>
             </Block>
         </AppDiv>
